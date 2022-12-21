@@ -45,10 +45,19 @@ export default createStore({
     ADD_RECIPE(state, recipe) {
       state.recipes.push(recipe);
     },
+    DELETE_RECIPE(state, recipe) {
+      console.log(recipe);
+      state.recipes = state.recipes.filter((recipesData) => {
+        return recipesData.slug !== recipe;
+      });
+    },
   },
   actions: {
-    ADD_RECIPE(newRecipte, payload) {
-      newRecipte.commit("ADD_RECIPE", payload);
+    ADD_RECIPE(newRecipe, payload) {
+      newRecipe.commit("ADD_RECIPE", payload);
+    },
+    DELETE_RECIPE(newRecipe, payload) {
+      newRecipe.commit("DELETE_RECIPE", payload);
     },
   },
 });

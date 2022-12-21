@@ -11,9 +11,12 @@
       >
         <h2>{{ recipe.title }}</h2>
         <p>{{ recipe.description }}</p>
-        <router-link :to="`/recipe/${recipe.slug}`">
-          <button>View Recipe</button>
-        </router-link>
+        <div class="button-control">
+          <router-link :to="`/recipe/${recipe.slug}`">
+            <button>View Recipe</button>
+          </router-link>
+          <button @click="deleteRecipe(recipe.title)">Delete Recipe</button>
+        </div>
       </div>
     </div>
 
@@ -113,6 +116,13 @@ export default {
 
       this.togglePopup();
     },
+    deleteRecipe(payload) {
+      this.$store.dispatch(
+        "DELETE_RECIPE",
+        payload.toLowerCase().replace(/\s/g, "-")
+      );
+      // console.log(payload.toLowerCase().replace(/\s/g, "-"));
+    },
   },
 };
 </script>
@@ -153,6 +163,13 @@ h1 {
   margin-bottom: 1rem;
 }
 
+.button-control {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+}
+
 .add-recipe-popup {
   position: fixed;
   top: 0;
@@ -163,6 +180,7 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: auto;
 }
 
 .add-recipe-popup .popup-content {
