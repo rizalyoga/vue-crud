@@ -63,7 +63,7 @@ h3 {
 
 .ingredients {
   padding: 1rem;
-  background-color: #081c33;
+  background-color: #0352ad;
   border-radius: 0.5rem;
   margin-bottom: 2rem;
 }

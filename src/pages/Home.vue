@@ -15,6 +15,7 @@
           <router-link :to="`/recipe/${recipe.slug}`">
             <button>View Recipe</button>
           </router-link>
+          <button @click="deleteRecipe(recipe.title)">Edit Recipe</button>
           <button @click="deleteRecipe(recipe.title)">Delete Recipe</button>
         </div>
       </div>
@@ -117,11 +118,12 @@ export default {
       this.togglePopup();
     },
     deleteRecipe(payload) {
-      this.$store.dispatch(
-        "DELETE_RECIPE",
-        payload.toLowerCase().replace(/\s/g, "-")
-      );
-      // console.log(payload.toLowerCase().replace(/\s/g, "-"));
+      if (confirm("Are you sure for delete recipe ?")) {
+        this.$store.dispatch(
+          "DELETE_RECIPE",
+          payload.toLowerCase().replace(/\s/g, "-")
+        );
+      }
     },
   },
 };
@@ -137,7 +139,7 @@ export default {
 
 h1 {
   font-size: 3rem;
-  margin-bottom: 32px;
+  margin-bottom: 20px;
 }
 
 .recipes {
@@ -149,7 +151,7 @@ h1 {
   padding: 1rem;
   border-radius: 5px;
   margin: 1rem;
-  background-color: #081c33;
+  background-color: #0352ad;
 }
 
 .recipes .card h2 {
@@ -176,7 +178,7 @@ h1 {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.259);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -189,6 +191,8 @@ h1 {
   border-radius: 1rem;
   width: 100%;
   max-width: 768px;
+  max-height: 750px;
+  overflow: auto;
 }
 
 .popup-content h2 {
